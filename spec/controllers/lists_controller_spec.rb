@@ -48,9 +48,14 @@ describe ListsController do
   end
 
   describe "GET 'create'" do
-    xit "returns http success" do
-      get 'create'
+    let!(:user) { create :user, email: 'test@test.com' }
+    let(:list_name) { 'simon test' }
+
+    it "returns http success" do
+      post 'create', name: list_name, format: :json
       response.should be_success
+      assigns(:list).should be_an(List)
+      JSON.parse(response.body)['name'].should == list_name
     end
   end
 

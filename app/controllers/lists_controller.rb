@@ -1,7 +1,7 @@
 class ListsController < ApplicationController
   before_action :get_user
   respond_to :json
-  
+
   rescue_from ActiveRecord::RecordNotFound do |e|
     render json: {error: 'Not found'}, status: 404
   end
@@ -15,6 +15,8 @@ class ListsController < ApplicationController
   end
 
   def create
+    @list = @user.lists.create(name: params[:name])
+    render "lists/show"
   end
 
   def update

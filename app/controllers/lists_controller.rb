@@ -1,5 +1,6 @@
 class ListsController < ApplicationController
   before_action :get_user
+  before_action :get_list, only: %i(show update destroy)
   respond_to :json
 
   rescue_from ActiveRecord::RecordNotFound do |e|
@@ -11,29 +12,30 @@ class ListsController < ApplicationController
   end
 
   def show
-    @list = get_list(params[:id])
   end
 
   def create
     @list = @user.lists.create(name: params[:name])
-    render "lists/show"
+    render_list
   end
 
   def update
-    @list = get_list(params[:id])
     @list.update_attributes! name: params[:name]
-    render "lists/show"
+    render_list
   end
 
   def destroy
-    @list = @user.lists.find(params[:id])
     @list.destroy!
-    render "lists/show"
+    render_list
   end
 
   private
-  def get_list(id)
-    @user.lists.find(id)
+  def get_list
+    @list = @user.lists.find(params[:id])
+  end
+
+  def render_list
+    render "lists/show"
   end
 
   def get_user

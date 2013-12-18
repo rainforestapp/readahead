@@ -10,6 +10,6 @@ require 'spec_helper'
 #     end
 #   end
 # end
-describe ListHelper do
+describe ListsHelper do
   pending "add some examples to (or delete) #{__FILE__}"
 end

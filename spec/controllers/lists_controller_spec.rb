@@ -66,10 +66,13 @@ describe ListsController do
     end
   end
 
-  describe "GET 'delete'" do
-    xit "returns http success" do
-      get 'delete'
+  describe "DELETE list" do
+    let(:list) { create :list, name: 'simons list' }
+
+    it "returns http success" do
+      delete 'destroy', id: list.id, format: :json
       response.should be_success
+      List.where(id: list.id).count.should == 0
     end
   end
 

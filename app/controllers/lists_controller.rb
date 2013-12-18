@@ -22,7 +22,10 @@ class ListsController < ApplicationController
   def update
   end
 
-  def delete
+  def destroy
+    @list = @user.lists.find(params[:id])
+    @list.destroy!
+    render "lists/show"
   end
 
   private

@@ -11,7 +11,7 @@ class ListsController < ApplicationController
   end
 
   def show
-    @list = @user.lists.find(params[:id])
+    @list = get_list(params[:id])
   end
 
   def create
@@ -20,6 +20,9 @@ class ListsController < ApplicationController
   end
 
   def update
+    @list = get_list(params[:id])
+    @list.update_attributes! name: params[:name]
+    render "lists/show"
   end
 
   def destroy
@@ -29,6 +32,10 @@ class ListsController < ApplicationController
   end
 
   private
+  def get_list(id)
+    @user.lists.find(id)
+  end
+
   def get_user
     @user = User.first
   end

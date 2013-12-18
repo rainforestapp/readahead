@@ -17,5 +17,11 @@ describe Link do
     it 'should be available for a URL' do
       expect{subject}.to_not raise_error
     end
+
+    ['title', 'word_count', 'author', 'domain'].each do |property|
+      it "has method #{property}" do
+        expect(subject.public_methods).to include(property.to_sym)
+      end
+    end
   end
 end

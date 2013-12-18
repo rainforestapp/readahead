@@ -1,5 +1,8 @@
 deployment:
   production:
     branch: master
-    heroku:
-      appname: readahead
+    commands:
+      - git push -f git@heroku.com:readahead.git $CIRCLE_SHA1:master
+      - heroku run rake db:migrate --app readahead:
+          timeout: 1800
+      - heroku restart --app readahead

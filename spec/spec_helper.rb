@@ -25,6 +25,7 @@ RSpec.configure do |config|
   config.use_transactional_examples = false
   config.use_transactional_fixtures = false
   config.include FactoryGirl::Syntax::Methods
+  config.render_views
   config.before(:suite) do
     DatabaseCleaner.clean_with(:truncation)
     DatabaseCleaner.strategy = :transaction

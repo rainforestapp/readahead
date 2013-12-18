@@ -6,6 +6,10 @@ describe LinksController do
   let(:link) { create :link }
   let(:json) { JSON.parse(response.body) }
 
+  before(:each) do
+    login_user(user)
+  end
+
   describe "GET 'index'" do
     describe "no links" do
       it "returns http success" do

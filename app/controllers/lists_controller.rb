@@ -1,5 +1,6 @@
 class ListsController < ApiController
-  before_action :get_list, only: %i(show update destroy)
+  before_action :get_user
+  before_action :get_list, only: %w(show update destroy)
   
   def index
     @lists = @user.lists

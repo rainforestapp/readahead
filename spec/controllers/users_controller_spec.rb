@@ -13,7 +13,6 @@ describe UsersController do
     it 'can create a new user' do
       post 'login', email: email, format: :json
       response.should be_success
-      puts response.body
       expect(session[:user_id]).to eq(User.find_by(email: email).id)
       expect(JSON.parse(response.body)).to eq('success' => true)
     end
@@ -21,7 +20,6 @@ describe UsersController do
     it 'can login an existing user' do
       post 'login', email: new_user.email, format: :json
       response.should be_success
-      puts response.body
       expect(session[:user_id]).to eq(User.find_by(email: new_user.email).id)
       expect(JSON.parse(response.body)).to eq('success' => true)
     end

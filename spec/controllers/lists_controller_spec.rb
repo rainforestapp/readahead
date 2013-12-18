@@ -3,8 +3,12 @@ require 'spec_helper'
 describe ListsController do
   let(:user) { create :user, email: 'test@test.com' }
   let(:list_name) { 'simon test' }
-  let(:list) { create :list, name: list_name }
+  let(:list) { create :list, name: list_name, user: user }
   let(:json) { JSON.parse(response.body) }
+
+  before(:each) do
+    login_user(user)
+  end
 
   describe "GET 'index'" do
     describe "with no data" do

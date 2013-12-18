@@ -3,6 +3,8 @@ require 'rest_client'
 
 class Link < ActiveRecord::Base
   validates :url, presence: true, url: true
+  has_many :link_lists
+  has_many :lists, through: :link_lists
   delegate :title, :word_count, :author, :domain, to: :representation
 
   def representation

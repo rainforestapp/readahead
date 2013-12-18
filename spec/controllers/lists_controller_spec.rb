@@ -1,8 +1,6 @@
 require 'spec_helper'
 
 describe ListsController do
-  
-
   let(:user) { create :user, email: 'test@test.com' }
   let(:list_name) { 'simon test' }
   let(:list) { create :list, name: list_name }

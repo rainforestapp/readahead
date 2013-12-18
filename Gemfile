@@ -16,7 +16,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-gem 'therubyracer', platforms: :ruby
+# gem 'therubyracer', platforms: :ruby
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -44,17 +44,15 @@ gem 'unicorn'
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
-
-group :test do
+group :test, :development do
   # For testing
   gem "rspec-rails"
-  gem "rspec-mocks"
-  gem "rspec"
+end
+
+group :test do
   gem "webmock"
   gem "vcr"
-  gem "rack-test"
   gem "shoulda-matchers"
   gem "timecop"
   gem "database_cleaner"
-  gem "test_after_commit"
 end

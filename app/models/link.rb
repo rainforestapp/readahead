@@ -3,6 +3,7 @@ require 'rest_client'
 
 class Link < ActiveRecord::Base
   validates :url, presence: true, url: true
+  delegate :title, :word_count, :author, :domain, to: :representation
 
   def representation
     @representation ||= Representation.new(url)

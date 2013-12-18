@@ -1,12 +1,6 @@
-class ListsController < ApplicationController
-  before_action :get_user
+class ListsController < ApiController
   before_action :get_list, only: %i(show update destroy)
-  respond_to :json
-
-  rescue_from ActiveRecord::RecordNotFound do |e|
-    render json: {error: 'Not found'}, status: 404
-  end
-
+  
   def index
     @lists = @user.lists
   end
@@ -36,9 +30,5 @@ class ListsController < ApplicationController
 
   def render_list
     render "lists/show"
-  end
-
-  def get_user
-    @user = User.first
   end
 end

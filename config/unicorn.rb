@@ -22,6 +22,5 @@ after_fork do |server, worker|
 
   if defined?(ActiveRecord::Base)
     ActiveRecord::Base.establish_connection
-    QC::Conn.connection = ActiveRecord::Base.connection.raw_connection
   end
 end

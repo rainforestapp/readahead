@@ -6,6 +6,18 @@ describe ListsController do
   let(:list) { create :list, name: list_name, user: user }
   let(:json) { JSON.parse(response.body) }
 
+  describe 'for a logged out user' do
+    before(:each) do
+      logout
+    end
+
+    it 'should report that no user was found' do
+      user
+      get 'index', format: :json
+      expect(json.key?('error')). to be_true
+    end
+  end
+
   before(:each) do
     login_user(user)
   end

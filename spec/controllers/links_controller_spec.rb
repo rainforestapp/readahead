@@ -29,7 +29,7 @@ describe LinksController do
     end
   end
 
-  describe "GET 'create'" do
+  describe "POST 'create'" do
     it "creates the link" do
       expect {
         post 'create', url: 'http://www.rainforestqa.com/', format: :json
@@ -46,7 +46,7 @@ describe LinksController do
     end
   end
 
-  describe "GET 'destroy'" do
+  describe "DELETE 'destroy'" do
     it "returns http success" do
       list
       id = list.link_lists.first.id
@@ -54,6 +54,17 @@ describe LinksController do
         delete 'destroy', id: id, format: :json
         response.should be_success
       }.to change{LinkList.count}.from(1).to(0)
+    end
+  end
+
+  describe "PUT 'update'" do
+    it "updates the timestamp" do
+      list
+      link_list = list.link_lists.first
+      expect {
+        put 'update', id: link_list.id, format: :json
+        response.should be_success
+      }.to change{link_list.reload.read_at.to_i}.from(0).to(Time.now.to_i)
     end
   end
 end

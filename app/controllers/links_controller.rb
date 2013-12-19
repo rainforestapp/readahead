@@ -17,6 +17,12 @@ class LinksController < ApiController
     render_link
   end
 
+  def update
+    @link_list = get_default_list.link_lists.find(params[:id])
+    @link_list.update_attributes!(read_at: Time.now) if @link_list && @link_list.read_at.nil?
+    render_link
+  end
+
   private
   def render_link
     render "links/show"

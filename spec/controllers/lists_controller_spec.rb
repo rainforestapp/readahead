@@ -14,7 +14,7 @@ describe ListsController do
     it 'should report that no user was found' do
       user
       get 'index', format: :json
-      expect(json.key?('error')). to be_true
+      expect(json.key?('error')).to be_true
     end
   end
 

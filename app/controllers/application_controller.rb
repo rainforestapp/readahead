@@ -1,9 +1,12 @@
 class ApplicationController < ActionController::Base
-  def current_user
-    User.find(request.session[:user_id])
+  helper_method :login_service, :login_service=
+  delegate :current_user, :current_user=, to: :login_service
+
+  def login_service
+    @login_service || Users::LoginService.new(request)
   end
 
-  def current_user=(user)
-    request.session[:user_id] = user.id
+  def login_service=(service_klass)
+    @login_service = service_klass
   end
 end
